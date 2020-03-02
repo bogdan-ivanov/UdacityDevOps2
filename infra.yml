@@ -1,3 +1,7 @@
+Description: >
+  George-Bogdan Ivanov
+  Udacity DevOps ND - Project 2
+
 Parameters:
 # whatever you consider a changing value, put it as a parameter instead of hard-coding it into your script
 Resources:
@@ -16,5 +20,12 @@ Resources:
           cd /var/www/html
           aws s3 cp s3://udacity-demo-1/udacity.zip .
           unzip -o udacity.zip
+
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+
   Outputs: 
   #Bonus points for useful outputs!
