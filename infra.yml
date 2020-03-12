@@ -2,7 +2,11 @@ Description: >
   George-Bogdan Ivanov
   Udacity DevOps ND - Project 2
 
-# Parameters:
+Parameters:
+  ENVIRON:
+    Description: Resource prefix
+    Type: String
+    Default: UND
 # whatever you consider a changing value, put it as a parameter instead of hard-coding it into your script
 Resources:
   #instace profile contains the IAM Role name(s) that we want to associate to our auto scaling EC2 Servers
@@ -26,5 +30,59 @@ Resources:
     Properties:
       CidrBlock: 10.0.0.0/16
       EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${ENVIRON} VPC
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.1.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${ENVIRON} Public SubNet 1
+        - Key: Type
+          Value: Public SubNet
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.2.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${ENVIRON} Private SubNet 1
+        - Key: Type
+          Value: Private SubNet
+
+  PublicSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.3.0/24
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${ENVIRON} Public SubNet 2
+        - Key: Type
+          Value: Public SubNet
+
+  PrivateSubnet2:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: 10.0.4.0/24
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${ENVIRON} Private SubNet 2
+        - Key: Type
+          Value: Private SubNet
+
+
+  
   #Outputs:
   #Bonus points for useful outputs!
